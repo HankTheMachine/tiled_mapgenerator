@@ -1,28 +1,44 @@
 import json
-
+from .defaults import Defaults
 
 
 class Layer:
-    def __init__(self,data=None):
+    """
+    An object representing a single layer in the map. When initializing, if no data is provided, a default empty layer is initialized.
+    """
+    def __init__(self,layername="New Layer",data=None,width=Defaults.mapWidth(),height=Defaults.mapHeight()):
+        self.layername = layername
         self.data = data
+        self.prints = Defaults.printFeedBack()
+        if self.data==None:
+            self.newEmpty(height,width)
     
-    def newEmpty(self,w,h,name):
+    def setprinting(self, bool):
+        """
+        Toggle printing in object. Input True or False. Use for debugging.
+        """
+        self.prints = bool
+
+    def newEmpty(self,w,h):
+       
         layerdata = {}
         layertiles = []
-        for x in range(w*h):
-            if x%3 == 0:
-                print("Creating new empty layer...", end="\r")
-            elif x%2 == 0:
-                print("Creating new empty layer..", end="\r")
-            else:
-                print("Creating new empty layer.", end="\r")
-            layertiles.append(0)
-        print("\nEmpty layer initialized successfully!")
+
+        if self.prints == True:
+            for x in range(w*h):
+                if x%3 == 0:
+                    print("Creating new empty layer with the name "+self.layername+"...", end="\r")
+                elif x%2 == 0:
+                    print("Creating new empty layer with the name "+self.layername+"..", end="\r")
+                else:
+                    print("Creating new empty layer with the name "+self.layername+".", end="\r")
+                layertiles.append(0)
+            print("\nEmpty layer initialized successfully!\n")
 
         layerdata["data"] = layertiles
         layerdata["height"] = h
         layerdata["id"] = 1
-        layerdata["name"] = name
+        layerdata["name"] = self.layername
         layerdata["opacity"] = 1
         layerdata["type"] = "tilelayer"
         layerdata["visible"] = 'true'
@@ -31,7 +47,13 @@ class Layer:
         layerdata["y"] = 0
         self.setData(layerdata)
 
+    def setName(self,newname):
+        self.layername = newname
+        self.data["name"] = newname
 
+    def getName(self):
+        return self.layername
+    
     def setData(self,data):
         """
         Sets ALL of the data associated with the layer to speficied input. Treat as a save, this overwrites everything previously saved in object.

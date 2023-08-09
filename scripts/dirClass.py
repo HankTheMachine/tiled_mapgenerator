@@ -31,7 +31,7 @@ class Directory:
 
     def readfile(self,filename):
         """
-        Returns file as a JSON. Handles error if file not found.
+        Returns file data as a JSON. Handles error if file not found.
         """
         try:
             return json.loads(open(self.path+filename).read())
@@ -46,15 +46,16 @@ class Directory:
             x = open(self.path+filename).read()
             return True
         except FileNotFoundError:
-            return False
+            pass
+        return False
     
-    def writeToFile(self,json,filename):
+    def writeJsonToFile(self,json,filename):
         """
-        Saves file to the directory with the specific filename.
+        Saves json to the directory with the specific filename.
         """
         with open(self.path+filename, "w") as writefile:
             writefile.write(json)
-            print("Map succesfully saved to "+self.path+filename+"!")
+
     
     @staticmethod
     def setExtension(filename,ext):

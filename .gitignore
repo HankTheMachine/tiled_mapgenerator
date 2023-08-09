@@ -1,10 +1,8 @@
-# The maps
-.maps/
-.mapExamples/
-maps/
-mapExamples/
+# The map files
+maps/*
 
 # Unfinished stuff
+mapExamples/
 tilesets/development/
 scripts/mapfile.py
 recipes/
