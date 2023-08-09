@@ -1,0 +1,3 @@
+maps_output_dir = .\maps\
+examplemaps_dir = .\mapExamples\
+tilesets_dir = .\tilesets\development
