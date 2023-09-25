@@ -34,6 +34,9 @@ class Layer:
                     print("Creating new empty layer with the name "+self.layername+".", end="\r")
                 layertiles.append(0)
             print("\nEmpty layer initialized successfully!\n")
+        else:
+            for x in range(w*h):
+                layertiles.append(0)
 
         layerdata["data"] = layertiles
         layerdata["height"] = h
@@ -128,7 +131,33 @@ class Layer:
         """
         self.data["data"][self.tileIndexFromXY(xy)] = tiletype
 
-    
+    @staticmethod
+    def getTilesBoxSelect(xystart,xyend):
+        """
+        Returns list of xy values in a box from xystart to xyend
+        """
+        tilesInBox = []
+        xDifference = xyend[0]-xystart[0]+1
+        yDifference = xyend[1]-xystart[1]+1
+        for horiz in range(xDifference):
+            for vertic in range(yDifference):
+                xytuple = [(xystart[0]+horiz),(xystart[1]+vertic)]
+                tilesInBox.append(xytuple)
+        return tilesInBox
+
+    @staticmethod
+    def getTilesBorderXYSelect(xystart,xyend):
+        foundtiles = []
+        xdiff = xyend[0]-xystart[0]
+        ydiff = xyend[1]-xystart[1]
+        for x in range(xdiff+1):
+            foundtiles.append([xystart[0]+x,xystart[1]])
+            foundtiles.append([xystart[0]+x,xyend[1]])
+        for y in range(ydiff+1):
+            foundtiles.append([xystart[0],xystart[1]+y])
+            foundtiles.append([xyend[0],xystart[1]+y])
+        return foundtiles
+
     #NE, E, SE, SW, W, NW
     #6*1,3*6,6*6
     #6(ne),6(n+2)

@@ -6,12 +6,14 @@ for row in txtfilerows:
     defaultvalue=row.split(" = ")[1]
     defaults.append(defaultvalue)
 
-mapName = defaults[0]
+mapName = str(defaults[0])
 mapx = int(defaults[1])
 mapy = int(defaults[2])
 tilex = int(defaults[3])
 tiley = int(defaults[4])
-defaultPrints = bool(defaults[5])
+defaultPrints = bool(int(defaults[5]))
+landPercentage = int(defaults[6])
+overwrite = bool(int(defaults[7]))
 
 class Defaults:
     def __init__(self) -> None:
@@ -35,6 +37,12 @@ class Defaults:
     @staticmethod
     def printFeedBack():
         return defaultPrints
+    @staticmethod
+    def overwrite():
+        return overwrite
+    @staticmethod
+    def landPercentage():
+        return landPercentage
     
     @staticmethod
     def getDefaultValues():
