@@ -1,53 +1,96 @@
-txtfile = open("./DEFAULT_VALUES.txt").read()
-txtfilerows = txtfile.split("\n")
-defaults = []
+txtfile = open("./PATHS.txt").read()
+txtfilesplit = txtfile.split("\n")
+paths = []
+for row in txtfilesplit:
+    path=row.split(" = ")[1]
+    paths.append(path)
 
-for row in txtfilerows:
+txtfiledefs = open("./DEFAULT_VALUES.txt").read()
+txtfilerowsdefs = txtfiledefs.split("\n")
+defaults = []
+for row in txtfilerowsdefs:
     defaultvalue=row.split(" = ")[1]
     defaults.append(defaultvalue)
 
-mapName = str(defaults[0])
-mapx = int(defaults[1])
-mapy = int(defaults[2])
-tilex = int(defaults[3])
-tiley = int(defaults[4])
-defaultPrints = bool(int(defaults[5]))
-landPercentage = int(defaults[6])
-overwrite = bool(int(defaults[7]))
+class Paths:
+    def __init__(self) -> None:
+        pass
 
+    @staticmethod
+    def maps():
+        return paths[0]
+    
+    @staticmethod
+    def examples():
+        return paths[1]
+    
+    @staticmethod
+    def tilesets():
+        return paths[2]
+    
+class Defaults:
+    txtfile = open("./PATHS.txt").read()
+txtfilesplit = txtfile.split("\n")
+paths = []
+for row in txtfilesplit:
+    path=row.split(" = ")[1]
+    paths.append(path)
+
+txtfiledefs = open("./DEFAULT_VALUES.txt").read()
+txtfilerowsdefs = txtfiledefs.split("\n")
+defaults = []
+for row in txtfilerowsdefs:
+    defaultvalue=row.split(" = ")[1]
+    defaults.append(defaultvalue)
+
+class Paths:
+    def __init__(self) -> None:
+        pass
+
+    @staticmethod
+    def maps():
+        return paths[0]
+    
+    @staticmethod
+    def examples():
+        return paths[1]
+    
+    @staticmethod
+    def tilesets():
+        return paths[2]
+    
 class Defaults:
     def __init__(self) -> None:
         pass
 
     @staticmethod
     def mapName():
-        return mapName
+        return str(defaults[0])
     @staticmethod
     def mapHeight():
-        return mapy
+        return int(defaults[2])
     @staticmethod
     def mapWidth():
-        return mapx 
+        return int(defaults[1])
     @staticmethod
     def tileHeight():
-        return tiley
+        return int(defaults[4])
     @staticmethod
     def tileWidth():
-        return tilex
+        return int(defaults[3])
     @staticmethod
     def printFeedBack():
-        return defaultPrints
+        return bool(int(defaults[5]))
     @staticmethod
     def overwrite():
-        return overwrite
+        return bool(int(defaults[7]))
     @staticmethod
     def landPercentage():
-        return landPercentage
-    
+        return int(defaults[6])
     @staticmethod
     def getDefaultValues():
-        return mapName,mapx,mapy,tilex,tiley
-    
+        return str(defaults[0]),int(defaults[1]),int(defaults[2]),int(defaults[3]),int(defaults[4])
+
     @staticmethod
     def fillDefaultValues(argsList):
         """
